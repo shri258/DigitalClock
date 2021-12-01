@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+
+        }
+        body{
+            background-color: black;
+        }
+        .container
+        {
+            color: red;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 70vh;
+        }
+        .container span
+        {
+            font-size: 100px;
+            font-weight: bolder;
+            border: 5px solid red;
+            padding: 20px;
+            min-width: 1000px;
+            max-width: 1000px;
+            min-height: 113px;
+            text-align: center;
+        }
+        h2
+        {
+            font-size: 100px;
+            color: white;
+            margin-top: 90px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Digital Clock</h2>
+    <div class="container">
+        <span class="clock">Lets Start</span>
+    </div>
+    <script>
+        function getTime()
+        {
+            let date=new Date();
+            let hours=date.getHours();
+
+            let remainderHours=hours%12;
+            if(remainderHours==0)
+            hours=12;
+            else
+            hours=remainderHours;
+
+            let amPM=hours>=12?'PM':'AM';
+
+            let minutes=date.getMinutes();
+
+            minutes=minutes<=9?"0"+minutes:minutes;
+
+
+            let seconds=date.getSeconds();
+
+            seconds=seconds<=9?"0"+seconds:seconds;
+
+            let milis=date.getMilliseconds();
+            milis=milis<=9?"00"+milis:milis;
+            milis=(milis>=10&&milis<=99)?"0"+milis:milis;
+            milis=(milis==1000)?999:milis;
+            return `${hours} : ${minutes} : ${seconds} : ${milis} : ${amPM}`;
+            // return date.toLocaleTimeString();---above whole logic function is already readymade in js #shortcut
+        };
+
+        setInterval(()=>
+        {
+            let Clock=document.querySelector('.clock');
+            Clock.innerHTML=getTime();
+        },1);
+    </script>
+
+</body>
+</html>
